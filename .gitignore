@@ -1,0 +1,10 @@
+.project
+.settings
+.classpath
+target
+bower_components
+node_modules
+dist
+.tmp
+.sass-cache
+npm-debug.log
