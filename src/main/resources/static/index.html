@@ -108,15 +108,25 @@
 		dnd.on('drop', function(event) {
 			event.stopPropagation();
 			event.preventDefault();
-
+			
 			// now do something with:
 			var files = event.originalEvent.dataTransfer.files;
-			//check for length
-			var file = files[0];
-			console.log(file.name);
-			console.log(file.type);
-			console.log(file.size);
-
+			if(files.length === 1){
+				var file = files[0];
+				console.log(file.name);
+				console.log(file.type);
+				console.log(file.size);
+				//check xml
+				if(file.type==='text/xml'){
+					console.log("Upload");
+				}  else {
+					alert("Please use DVDProfiler exported xml file!");
+				}
+			} else {
+				alert("Sorry, single file only!");
+			}
+			$(this).addClass('uploadinactive');
+			$(this).removeClass('uploadactive');
 			return false;
 		});
 
