@@ -111,6 +111,15 @@
 			
 			// now do something with:
 			var files = event.originalEvent.dataTransfer.files;
+			upload(files);
+		});
+		
+		//regisetr onchange to input file field
+		$('#uploadinput').on('change', function(e){
+			upload(e.target.files);
+		});
+		
+		function upload(files){
 			if(files.length === 1){
 				var file = files[0];
 				console.log(file.name);
@@ -119,6 +128,37 @@
 				//check xml
 				if(file.type==='text/xml'){
 					console.log("Upload");
+					var formData = new FormData();
+					formData.append('file', file);
+					var uploadURL ="/upload"; //Upload URL
+			        var extraData ={}; //Extra Data.
+			        var jqXHR=$.ajax({
+			                xhr: function() {
+			                var xhrobj = $.ajaxSettings.xhr();
+			                if (xhrobj.upload) {
+			                        xhrobj.upload.addEventListener('progress', function(event) {
+			                            var percent = 0;
+			                            var position = event.loaded || event.position;
+			                            var total = event.total;
+			                            if (event.lengthComputable) {
+			                                percent = Math.ceil(position / total * 100);
+			                            }
+			                            //Set progress
+			                            console.log(percent);
+			                        }, false);
+			                    }
+			                return xhrobj;
+			            },
+			            url: uploadURL,
+			            type: "POST",
+			            contentType:false,
+			            processData: false,
+			            cache: false,
+			            data: formData,
+			            success: function(data){
+			                console.log("Finished: ", data);           
+			            }
+			        });
 				}  else {
 					alert("Please use DVDProfiler exported xml file!");
 				}
@@ -128,7 +168,8 @@
 			$(this).addClass('uploadinactive');
 			$(this).removeClass('uploadactive');
 			return false;
-		});
+
+		}
 
 		//now prevent dropping on document
 			$(document).on('dragenter', function(e) {
