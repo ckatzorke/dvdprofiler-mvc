@@ -3,18 +3,42 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.dvdprofilermvc</groupId>
 	<artifactId>dvdprofilermvc</artifactId>
-	<packaging>war</packaging>
+<!-- 	<packaging>war</packaging> -->
 	<version>0.0.1-SNAPSHOT</version>
 	<name>dvdprofilermvc Maven Webapp</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-parent</artifactId>
+			<version>${boot.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<version>1.1.4.RELEASE</version>
+			<version>${boot.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+			<version>${boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>oss.snafu</groupId>
+			<artifactId>snafu</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<properties>
 		<start-class>org.dvdprofilermvc.Application</start-class>
+		<boot.version>1.2.0.RC2</boot.version>
 	</properties>
 
 	<build>
@@ -23,6 +47,15 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${boot.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -41,4 +74,9 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+	<scm>
+		<url>https://github.com/ckatzorke/dvdprofiler-mvc</url>
+		<developerConnection>scm:git:git@github.com:ckatzorke/dvdprofiler-mvc.git</developerConnection>
+		<connection>scm:git:git://github.com:ckatzorke/dvdprofiler-mvc.git</connection>
+	</scm>
 </project>

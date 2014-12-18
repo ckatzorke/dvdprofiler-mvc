@@ -3,15 +3,24 @@
   "version": "0.0.0",
   "dependencies": {},
   "devDependencies": {
-    "grunt": "^0.4.1",
-    "grunt-bowercopy": "^1.1.0",
-    "grunt-contrib-jshint": "^0.10.0",
-    "load-grunt-tasks": "^0.4.0"
+    "gulp": "^3.8.9",
+    "gulp-bower": "0.0.7",
+    "gulp-jshint": "^1.9.0",
+    "gulp-rimraf": "^0.1.1",
+    "jshint-stylish": "^1.0.0",
+    "karma": "^0.12.24",
+    "karma-chrome-launcher": "^0.1.5",
+    "karma-jasmine": "^0.1.5",
+    "karma-phantomjs-launcher": "^0.1.4"
   },
   "engines": {
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "grunt test"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/ckatzorke/dvdprofilermvc.git"
   }
 }

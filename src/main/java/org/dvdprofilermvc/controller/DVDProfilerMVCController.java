@@ -77,6 +77,11 @@ public class DVDProfilerMVCController {
 		return repository.getAll();
 	}
 
+	@RequestMapping(value = "/nope", method = RequestMethod.GET, produces = "application/json")
+	public String justtesing() {
+		return ",öü";
+	}
+
 	private File upload(MultipartFile file) throws IOException {
 		final byte[] bytes = file.getBytes();
 		final File projectFolder = io.getProjectDir();

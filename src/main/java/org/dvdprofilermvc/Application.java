@@ -13,11 +13,15 @@ import org.springframework.boot.context.embedded.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import oss.snafu.json.JsonInjectionMitigationHandlerInterceptor;
 
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
-public class Application {
+public class Application extends WebMvcConfigurerAdapter {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Application.class.getName());
 
@@ -44,5 +48,10 @@ public class Application {
 	DvdProfilerRepository createDvdProfilerRepository() {
 		final InMemoryDvdProfilerRepository repo = new InMemoryDvdProfilerRepository();
 		return repo;
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new JsonInjectionMitigationHandlerInterceptor()).addPathPatterns("/dvds", "/nope");
 	}
 }
