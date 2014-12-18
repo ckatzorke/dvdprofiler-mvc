@@ -108,6 +108,8 @@
 		dnd.on('drop', function(event) {
 			event.stopPropagation();
 			event.preventDefault();
+			$(this).addClass('uploadinactive');
+			$(this).removeClass('uploadactive');
 			
 			// now do something with:
 			var files = event.originalEvent.dataTransfer.files;
@@ -165,8 +167,7 @@
 			} else {
 				alert("Sorry, single file only!");
 			}
-			$(this).addClass('uploadinactive');
-			$(this).removeClass('uploadactive');
+
 			return false;
 
 		}
